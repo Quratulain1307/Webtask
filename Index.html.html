@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriFarm - Exact Design Implementation</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Exact Color Scheme */
+        :root {
+            --agri-green: #388E3C; /* Primary green from your specs */
+            --agri-yellow: #FFB300; /* Vibrant yellow from your specs */
+            --agri-dark: #2E2E2E; /* Dark text color */
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--agri-dark);
+            line-height: 1.6;
+        }
+        
+        /* Header Topbar - Exact Match */
+        .header-topbar {
+            background-color: var(--agri-green);
+            padding: 6px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-right: 12px;
+            font-size: 15px;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .contact-info span {
+            color: white;
+            margin-left: 25px;
+            font-size: 13px;
+        }
+        
+        .contact-info i {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+        
+        /* Main Navigation - Pixel Perfect */
+        .main-navigation {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .logo-text {
+            font-weight: 800;
+            font-size: 26px;
+            letter-spacing: 0.5px;
+        }
+        
+        .logo-text .green {
+            color: var(--agri-green);
+        }
+        
+        .logo-text .yellow {
+            color: var(--agri-yellow);
+        }
+        
+        .nav-phone {
+            font-weight: 600;
+            color: var(--agri-dark);
+            margin-right: 25px;
+        }
+        
+        .nav-phone i {
+            color: var(--agri-green);
+            margin-right: 8px;
+        }
+        
+        .search-box {
+            width: 220px;
+            position: relative;
+        }
+        
+        .search-box input {
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 6px 15px;
+            font-size: 14px;
+            padding-right: 40px;
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            background: var(--agri-yellow);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            color: var(--agri-dark);
+            font-size: 13px;
+        }
+        
+        /* Yellow Navigation Menu - Exact */
+        .yellow-nav {
+            background: var(--agri-yellow);
+            padding: 0;
+        }
+        
+        .yellow-nav .nav-link {
+            color: var(--agri-dark);
+            font-weight: 600;
+            font-size: 14px;
+            padding: 14px 20px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .yellow-nav .nav-link.active {
+            background: var(--agri-green);
+            color: white;
+        }
+        
+        .yellow-nav .nav-link:hover:not(.active) {
+            background: rgba(0,0,0,0.05);
+        }
+        
+        /* Hero Banner - Exact Recreation */
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('Screenshot 2025-04-08 132526.png') center/cover no-repeat;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 42px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .hero-content p {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Products Section - Exact Grid */
+        .products-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-weight: 700;
+            color: var(--agri-green);
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-size: 28px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--agri-yellow);
+        }
+        
+        .product-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-body {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .product-title {
+            font-weight: 700;
+            color: var(--agri-green);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        /* About Section - Exact Green Background */
+        .about-section {
+            background: var(--agri-green);
+            padding: 70px 0;
+            color: white;
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .about-header h2 {
+            font-weight: 700;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .about-header h3 {
+            font-weight: 600;
+            font-size: 20px;
+        }
+        
+        .about-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: var(--agri-dark);
+            text-align: center;
+        }
+        
+        .about-card h4 {
+            font-weight: 700;
+            color: var(--agri-green);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .about-card .btn {
+            background: var(--agri-yellow);
+            color: var(--agri-dark);
+            font-weight: 600;
+            border: none;
+            padding: 8px 25px;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        /* Impact Section - 4 Column Layout */
+        .impact-section {
+            padding: 60px 0;
+            background: #f9f9f9;
+        }
+        
+        .impact-item {
+            text-align: center;
+            padding: 0 15px;
+        }
+        
+        .impact-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--agri-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+        
+        .impact-item h3 {
+            font-weight: 700;
+            color: var(--agri-green);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        /* Certifications - Exact Styling */
+        .certifications-section {
+            padding: 60px 0;
+        }
+        
+        .certification-logo {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        
+        /* Footer - Exact Match */
+        .footer-top {
+            background: linear-gradient(rgba(0,0,0,0.7), url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            padding: 50px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .footer-social a {
+            color: white;
+            margin: 0 12px;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.3s;
+        }
+        
+        .footer-social a:hover {
+            background: var(--agri-yellow);
+            color: var(--agri-dark);
+        }
+        
+        .footer-links {
+            background: var(--agri-green);
+            padding: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            font-weight: 600;
+            margin: 0 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        .footer-bottom {
+            background: #2E7D32; /* Slightly darker green */
+            padding: 15px 0;
+            color: white;
+            font-size: 13px;
+        }
+        
+        /* Exact Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 16px;
+            }
+            
+            .yellow-nav .nav-link {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-topbar .col-md-6:last-child {
+                margin-top: 8px;
+            }
+            
+            .contact-info span {
+                margin-left: 0;
+                margin-right: 15px;
+            }
+            
+            .main-navigation .d-flex {
+                margin-top: 15px;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .hero-banner {
+                height: 400px;
+            }
+            
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .yellow-nav {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+            }
+            
+            .impact-item {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Topbar (Green) -->
+    <div class="header-topbar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="contact-info">
+                        <span><i class="fas fa-envelope"></i> info@agrifarm.com</span>
+                        <span><i class="fas fa-phone"></i> +1 (234) 567-8900</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation (White) -->
+    <nav class="main-navigation">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <a class="logo-text" href="#">
+                        <span class="green">LOGO</span> <span class="yellow">HERE</span>
+                    </a>
+                </div>
+                <div class="col-md-8 d-flex justify-content-end align-items-center">
+                    <span class="nav-phone d-none d-lg-block">
+                        <i class="fas fa-phone"></i> +1 (234) 567-8900
+                    </span>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Yellow Navigation Menu -->
+    <div class="yellow-nav">
+        <div class="container">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Fruits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Vegetable Oil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sustainability</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Media Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="hero-content">
+                <h1>LOREM IPSUM IS SIMPLY PRINTING</h1>
+                <p>LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">AGRICULTURE PRODUCTS</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <div class="product-img" style="background-image: url('Screenshot 2025-04-08 134838.png');"></div>
+                        <div class="product-body">
+                            <h3 class="product-title">Kola Nut</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <div class="product-img" style="background-image: url('Screenshot 2025-04-08 135253.png');"></div>
+                        <div class="product-body">
+                            <h3 class="product-title">Gacillia Nut</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <div class="product-img" style="background-image: url('Screenshot 2025-04-08 135139.png');"></div>
+                        <div class="product-body">
+                            <h3 class="product-title">Cocoa Nut</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-header">
+                <h2>BEYOND JUST PLANTING A SEED...</h2>
+                <h3>WE CONTRIBUTE TO A BETTER FUTURE FOR OUR PEOPLE AND THE ENVIRONMENT</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="about-card">
+                        <h4>About Us</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+                        <button class="btn">Read More</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="about-card">
+                        <h4>History</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+                        <button class="btn">Read More</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="about-card">
+                        <h4>Corporate Social Responsibility</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+                        <button class="btn">Read More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+   <!-- Info Cards Section  -->
+<section class="container my-5">
+    <div class="row">
+        <div class="col-md-3 col-6">
+            <div class="info-card">
+                <div class="info-card-header">Our People</div>
+                <div class="info-card-body">
+                    <img src="Screenshot 2025-04-11 223300.png" class="info-card-image" alt="Our People">
+                    <p class="info-card-text">Lorem Ipsum is simply dummy text of the printing and typeset-
+                    ting industry. Lorem Ipsum has been the ind..</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="info-card">
+                <div class="info-card-header">Community Development</div>
+                <div class="info-card-body">
+                    <img src="Screenshot 2025-04-11 223405.png" class="info-card-image" alt="Community Development">
+                    <p class="info-card-text">Lorem Ipsum is simply dummy text of the printing and typeset-
+                    ting industry. Lorem Ipsum has been the ind..</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="info-card">
+                <div class="info-card-header">Environment</div>
+                <div class="info-card-body">
+                    <img src="Screenshot 2025-04-11 223505.png" class="info-card-image" alt="Environment">
+                    <p class="info-card-text">Lorem Ipsum is simply dummy text of the printing and typeset-
+                    ting industry. Lorem Ipsum has been the ind..</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="info-card">
+                <div class="info-card-header">Sustainability</div>
+                <div class="info-card-body">
+                    <img src="Screenshot 2025-04-11 223600.png" class="info-card-image" alt="Sustainability">
+                    <p class="info-card-text">Lorem Ipsum is simply dummy text of the printing and typeset-
+                    ting industry. Lorem Ipsum has been the ind..</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Certifications Section -->
+    <section class="certifications-section">
+        <div class="container">
+            <h2 class="section-title">CERTIFICACIONES</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="certification-logo">
+                        <img src="Screenshot 2025-04-10 220630.png" alt="Certification 1"  >
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="certification-logo">
+                        <img src="Screenshot 2025-04-10 220640.png" alt="Certification 2">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="certification-logo">
+                        <img src="Screenshot 2025-04-10 220646.png" alt="Certification 3">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="certification-logo">
+                        <img src="Screenshot 2025-04-10 220657.png" alt="Certification 4">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="certification-logo">
+                        <img src="Screenshot 2025-04-10 220716.png" alt="Certification 5">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                            <div class="certification-logo">
+                                <img src="Screenshot 2025-04-10 220734.png" alt="Certification 6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div class="container text-center">
+                <a href="#">Home</a>
+                <a href="#">Fruits</a>
+                <a href="#">Vegetable Oil</a>
+                <a href="#">Services</a>
+                <a href="#">Sustainability</a>
+                <a href="#">News</a>
+                <a href="#">Media Gallery</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container text-center">
+                <p class="mb-0">Copyright © 2019 companyname.com</p>
+                <p class="mb-0">Design by www.freepsddesign.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
